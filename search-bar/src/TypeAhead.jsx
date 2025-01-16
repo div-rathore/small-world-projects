@@ -16,6 +16,7 @@ const TypeAhead = () => {
   useEffect(() => {
     const  abortController = new AbortController();
     const fetchData = async () => {
+     console.log(abortController);
      
         const {signal} = abortController
       try {
