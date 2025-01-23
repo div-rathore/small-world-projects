@@ -1,0 +1,19 @@
+.container{
+  display: flex;
+  justify-content: space-around;
+}
+
+.box{
+  background: #f0f0f0;
+  padding: 1rem;
+  width: 250px;
+  min-height: 300px;
+}
+
+.inner-box{
+  user-select: none;
+  padding: 16px;
+  margin: 0 0 8px 0;
+  background-color: white;
+  cursor: move;
+}
