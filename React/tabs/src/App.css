@@ -1,0 +1,11 @@
+.tabs__content{
+  width: 16rem;
+  height: 20rem;
+  border: 1px solid black;
+  border-top: none;
+}
+
+.active{
+  border: 2px solid black;
+  border-bottom: none;
+}
