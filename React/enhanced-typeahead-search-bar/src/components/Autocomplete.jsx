@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
 import "./styles.css";
 import SuggestionsList from "./SuggestionsList";
-import debounce from 'loadash/debounce'
+import { useCache } from "../hooks/useCache";
+
 
 const Autocomplete = ({
   placeholder,
@@ -19,7 +20,8 @@ const Autocomplete = ({
   const [suggestions, setSuggestions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  console.log(suggestions);
+  const cacheValue = useCache(inputValue)
+//   console.log(suggestions);
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
@@ -48,7 +50,7 @@ const Autocomplete = ({
     }
   };
 
-  const getSuggestionsDebounced = useCallback(debounce(getSuggestions, 400),[])
+//   const getSuggestionsDebounced = useCallback(_.debounce(getSuggestions, 400),[])
   const handleSuggestionClick = (suggestion) => {
     setInputValue(dataKey? suggestion[dataKey]:dataKey)
     onSelect(suggestion)
@@ -56,11 +58,11 @@ const Autocomplete = ({
   };
   useEffect(() => {
     if (inputValue.length) {
-        getSuggestionsDebounced(inputValue);
+        getSuggestions(cacheValue);
     } else {
       setSuggestions([]);
     }
-  }, [inputValue]);
+  }, [cacheValue]);
   return (
     <div className="container">
       <input
