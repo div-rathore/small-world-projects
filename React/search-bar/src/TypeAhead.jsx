@@ -21,7 +21,7 @@ const TypeAhead = () => {
         const {signal} = abortController
       try {
         if(cache.current[query]){
-            setResult(Cache.current[query])
+            setResult(cache.current[query])
             setStatus(STATE.SUCCESS)
             return;
         }
@@ -33,7 +33,7 @@ const TypeAhead = () => {
           {signal}
         );
         const data = await res.json();
-        // console.log(data);
+        console.log(data);
         cache.current[query]= data.products;
         setStatus(STATE.SUCCESS);
         setResult(data.products);
