@@ -8,8 +8,8 @@ function App() {
     <>
      <h1>Nested Comment System</h1>
      <NestedComments comments = {commentsData}
-     onSubmit= {()=>{}}
-     onEdit={()=>{}}
+     onSubmit= {(content)=>{}}
+     onEdit={(content)=>{}}
      onDelete={()=>{}}
     //  onUpvote={()=>{}}
     //  onDownVote={()=>{}}

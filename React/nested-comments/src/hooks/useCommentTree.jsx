@@ -35,9 +35,35 @@ const useCommentTree = (initialComments) => {
     }
   };
 
+const editNode = (tree, nodeId, updatedContent)=>{
+return tree.map((node)=>{
+    if(node.id===nodeId){
+return{
+    ...node, content: updatedContent, timestamp: new Date().toISOString()
+}
+    }else if (node.replies && node.replies.length>0){
+        return{
+            ...node, replies:editNode(node.replies, nodeId, updatedContent)
+        }
+    }
+    return node;
+})
+}
+
+  const editComment = (commentId, updatedContent) => {
+    setComments((prev)=> editNode(prev, commentId,updatedContent))
+
+  }
+
+  const deleteComment = ()=>{
+
+  }
+
   return {
     comments,
-    insertComment
+    insertComment,
+    editComment,
+    deleteComment
   };
 };
 
