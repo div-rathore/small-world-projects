@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 
-const Comment = ({ comment, onSubmitComment, onEditComment }) => {
+const Comment = ({
+  comment,
+  onSubmitComment,
+  onEditComment,
+  onDeleteComment,
+}) => {
   const [replyContent, setReplyContent] = useState("");
   const [expand, setExpand] = useState(false);
   const [editToggle, setEditToggle] = useState(false);
@@ -21,14 +26,16 @@ const Comment = ({ comment, onSubmitComment, onEditComment }) => {
     }
   };
   const handleEditSubmit = () => {
- 
-      onEditComment(comment.id, editedContent);
-      setEditToggle(false);
-    
+    onEditComment(comment.id, editedContent);
+    setEditToggle(false);
   };
   const handleEditToggle = () => {
     setEditToggle(!editToggle);
     setEditedContent(comment.content);
+  };
+
+  const handleDelete = (commentId) => {
+    onDeleteComment(commentId);
   };
   return (
     <div className="comment">
@@ -65,7 +72,12 @@ const Comment = ({ comment, onSubmitComment, onEditComment }) => {
         <button className="comment-button" onClick={handleEditToggle}>
           Edit
         </button>
-        <button className="comment-button">Delete</button>
+        <button
+          className="comment-button"
+          onClick={() => handleDelete(comment.id)}
+        >
+          Delete
+        </button>
       </div>
       {expand && (
         <div className="comment-replies">
@@ -89,6 +101,7 @@ const Comment = ({ comment, onSubmitComment, onEditComment }) => {
                 comment={reply}
                 onSubmitComment={onSubmitComment}
                 onEditComment={onEditComment}
+                onDeleteComment={onDeleteComment}
               />
             );
           })}

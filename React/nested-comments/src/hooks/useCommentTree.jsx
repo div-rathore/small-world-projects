@@ -55,8 +55,20 @@ return{
 
   }
 
-  const deleteComment = ()=>{
+  const deleteNode = (tree,nodeId)=> {
+   return tree.reduce((acc,node)=>{
+        if(node.id === nodeId){
+            return acc
+        }
+        else if (node.replies && node.replies.length>0){
+            node.replies = deleteNode(node.replies,nodeId)
+        }
+        return[...acc,node]
+    },[])
+  }
 
+  const deleteComment = (commentId)=>{
+    setComments((prev)=> deleteNode(prev,commentId))
   }
 
   return {

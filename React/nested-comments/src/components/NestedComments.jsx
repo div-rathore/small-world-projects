@@ -5,7 +5,7 @@ import Comment from "./Comment";
 
 const NestedComments = ({ comments=[], onSubmit, onEdit, onDelete }) => {
   const [comment, setComment] = useState("");
-  const { comments: commentsData , insertComment,editComment} = useCommentTree(comments);
+  const { comments: commentsData , insertComment,editComment, deleteComment} = useCommentTree(comments);
   const handleChange = (e) => {
     setComment(e.target.value);
   };
@@ -23,6 +23,11 @@ const NestedComments = ({ comments=[], onSubmit, onEdit, onDelete }) => {
   const handleEdit = (commentId, updatedComment)=>{
     editComment(commentId,updatedComment)
     onEdit(updatedComment)
+  }
+
+  const handleDelete= (commentId)=>{
+    deleteComment(commentId)
+    onDelete(commentId)
   }
   return (
     <>
@@ -48,6 +53,7 @@ const NestedComments = ({ comments=[], onSubmit, onEdit, onDelete }) => {
             comment={comment}
             onSubmitComment={handleReply}
             onEditComment={handleEdit}
+            onDeleteComment = {handleDelete}
           />
         );
       })}
