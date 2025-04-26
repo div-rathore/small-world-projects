@@ -1,0 +1,27 @@
+.black {
+  background-color: black;
+}
+
+.white {
+  background-color: white;
+}
+.blue {
+  background-color: blue;
+}
+.box {
+  width: 70px;
+  height: 70px;
+}
+
+.chess {
+  border: 2px solid black;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.table {
+  cursor: pointer;
+  margin: 0 auto;
+}
